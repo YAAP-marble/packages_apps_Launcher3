@@ -146,6 +146,9 @@ public class TaskbarManager implements DisplayDecorationListener {
     public static final Uri NAV_BAR_LAYOUT = Settings.System.getUriFor(
             Settings.System.NAVBAR_LAYOUT_MODE);
 
+    public static final Uri NAVIGATION_BAR_HINT = Settings.System.getUriFor(
+            Settings.System.NAVIGATION_BAR_HINT);
+
     private final Context mBaseContext;
     private final int mPrimaryDisplayId;
     private final TaskbarNavButtonCallbacks mNavCallbacks;
@@ -475,6 +478,8 @@ public class TaskbarManager implements DisplayDecorationListener {
         };
         SettingsCache.INSTANCE.get(mPrimaryWindowContext)
                 .register(NAV_BAR_LAYOUT, mOnLayoutModeChangeListener);
+        SettingsCache.INSTANCE.get(mPrimaryWindowContext)
+                .register(NAVIGATION_BAR_HINT, mOnLayoutModeChangeListener);
 
         SystemDecorationChangeObserver.getINSTANCE().get(mPrimaryWindowContext)
                 .registerDisplayDecorationListener(this);
@@ -1133,6 +1138,8 @@ public class TaskbarManager implements DisplayDecorationListener {
                 .unregister(NAV_BAR_INVERSE, mOnSettingsChangeListener);
         SettingsCache.INSTANCE.get(mPrimaryWindowContext)
                 .unregister(NAV_BAR_LAYOUT, mOnLayoutModeChangeListener);
+        SettingsCache.INSTANCE.get(mPrimaryWindowContext)
+                .unregister(NAVIGATION_BAR_HINT, mOnLayoutModeChangeListener);
         SystemDecorationChangeObserver.getINSTANCE().get(mPrimaryWindowContext)
                 .unregisterDisplayDecorationListener(this);
         debugPrimaryTaskbar("destroy: unregistering component callbacks");
